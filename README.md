@@ -53,7 +53,9 @@ django-admin startproject myproject
 python manage.py startapp myapp
 ```
 
-- [ ] Add Test framework
+- [X] Add Test framework
+Turns out there's already some boilerplate for tests. Set up a sample using `APITestCase`
+
 - [ ] Learn how to fetch data from open-meto.com
 - [ ] GET endpoint which takes lat/long query params and returns weather JSON on that location
 - [ ] Countries: query param with country name using a few hardcoded city names/latlong lookups
@@ -73,7 +75,6 @@ docker-compose build
 ```
 
 ## Usage
-Provide examples of how to use the project.
 
 ```bash
 # Run the project
@@ -81,3 +82,9 @@ docker-compose start
 ```
 
 Go to http://localhost:8000/api/hello/
+
+## Testing
+
+```bash
+docker-compose run web python manage.py test weatherapp
+```
