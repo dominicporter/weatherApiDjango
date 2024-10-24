@@ -56,8 +56,14 @@ python manage.py startapp myapp
 - [X] Add Test framework
 Turns out there's already some boilerplate for tests. Set up a sample using `APITestCase`
 
-- [ ] Learn how to fetch data from open-meto.com
-- [ ] GET endpoint which takes lat/long query params and returns weather JSON on that location
+- [X] Learn how to fetch data from open-meto.com
+Simple GET request to an unauthenticated API, which takes a params record with lat/long and other argument.
+There is an openmeto library to wrap the calls and do caching/retries etc but for now just keeping it simple with `requests`.
+Docs here: https://open-meteo.com/en/docs
+
+- [X] GET endpoint which takes lat/long query params and returns weather JSON on that location
+To start with just getting current weather and dumping out the JSON.
+
 - [ ] Countries: query param with country name using a few hardcoded city names/latlong lookups
 - [ ] Country lookup - on receiving an unknown country name try to get its latlong from another API
 - [ ] Lazy loading / caching countries - store country locations in a DB table
