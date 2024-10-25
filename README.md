@@ -84,12 +84,11 @@ So, using a DB as a cache isn't the most clever thing really but it seemed an ob
 I noticed that lib-meteo has a Climate Change API, so in the context of a holiday destination planner it might be useful to calculate some info about how badly a destination has been affected, or is likely to be affected in the future. For example, we could calculate current temperature rise above pre-industrial levels at that location, CO2 PPM, PM2.5 levels or likelihood of flooding. This is all available in open-meteo and would just need some data aggregation, probably using `pandas`.
 
 ## Installation
-Provide instructions on how to set up the project locally.
 
 ```bash
-git clone https://github.com/yourusername/yourproject.git
+git clone https://github.com/dominicporter/weatherApiDjango.git
 
-cd yourproject
+cd weatherApiDjango
 
 docker-compose build
 
