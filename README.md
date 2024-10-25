@@ -47,6 +47,7 @@ So that I can build a website which shows this
 
 ## Progress
 - [X] Django framework running in Docker
+
 I have never used Django before so bit of pre-reading was necessary. Mostly boiler plate generated with:
 ```
 django-admin startproject myproject
@@ -54,23 +55,29 @@ python manage.py startapp myapp
 ```
 
 - [X] Add Test framework
+
 Turns out there's already some boilerplate for tests. Set up a sample using `APITestCase`
 
 - [X] Learn how to fetch data from open-meto.com
+
 Simple GET request to an unauthenticated API, which takes a params record with lat/long and other argument.
 There is an openmeto library to wrap the calls and do caching/retries etc but for now just keeping it simple with `requests`.
 Docs here: https://open-meteo.com/en/docs
 
 - [X] GET endpoint which takes lat/long query params and returns weather JSON on that location
+
 To start with just getting current weather and dumping out the JSON.
 
 - [X] Cities: query param with City name using a few hardcoded city names/latlong lookups
 
 - [X] Country lookup - on receiving an unknown country name try to get its latlong from another API
+
 Using Nominatim API - free, open and seems to work.
+
 Just noticed that open-meto also has a Geocoder... one for next time.
 
 - [X] Lazy loading / caching countries - store country locations in a DB table
+
 So, using a DB as a cache isn't the most clever thing really but it seemed an obvious way to learn a bit about how Django DB interaction works. If I actually wanted a cache, there are lots of libraries that do this more sensibly, including one built into the open-meteo libary. Also I couldn't think of a more useful thing to stick in the DB right now.
 
 ## Further ideas
