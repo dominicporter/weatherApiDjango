@@ -68,8 +68,13 @@ To start with just getting current weather and dumping out the JSON.
 
 - [X] Country lookup - on receiving an unknown country name try to get its latlong from another API
 Using Nominatim API - free, open and seems to work.
+Just noticed that open-meto also has a Geocoder... one for next time.
 
-- [ ] Lazy loading / caching countries - store country locations in a DB table
+- [X] Lazy loading / caching countries - store country locations in a DB table
+So, using a DB as a cache isn't the most clever thing really but it seemed an obvious way to learn a bit about how Django DB interaction works. If I actually wanted a cache, there are lots of libraries that do this more sensibly, including one built into the open-meteo libary. Also I couldn't think of a more useful thing to stick in the DB right now.
+
+## Further ideas
+I noticed that lib-meteo has a Climate Change API, so in the context of a holiday destination planner it might be useful to calculate some info about how badly a destination has been affected, or is likely to be affected in the future. For example, we could calculate current temperature rise above pre-industrial levels at that location, CO2 PPM, PM2.5 levels or likelihood of flooding. This is all available in open-meteo and would just need some data aggregation, probably using `pandas`.
 
 ## Installation
 Provide instructions on how to set up the project locally.
