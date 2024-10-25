@@ -37,35 +37,43 @@ class GetWeatherByLocationTests(APITestCase):
         Ensure the /weather/ endpoint returns weather data when given valid city.
         """
         # Given
-        mock_get.return_value.status_code = 200
-        cityLat = 55.9533
-        cityLong = -3.1883
-        mock_get.return_value.json.return_value = {
-            "latitude": cityLat,
-            "longitude": cityLong,
+        mock_response_1 = mock.Mock()
+        mock_response_1.status_code = 200
+        mock_response_1.json.return_value = [{'lat': '123', 'lon': '456'}]
+        
+        mock_response_2 = mock.Mock()
+        mock_response_2.status_code = 200
+        mock_response_2.json.return_value = {
+            "latitude": 123,
+            "longitude": 456,
             "current_weather": {
-                "temperature": 12.34,
-                "windspeed": 43.21
+                "temperature": 20.5,
+                "windspeed": 10.0
             }
         }
+
+        mock_get.side_effect = [mock_response_1, mock_response_2]
         url = reverse('get_weather_by_location')
 
         # When
         response = self.client.get(url, {'city': 'Edinburgh'})
 
         # Then
-        mock_get.assert_called_once_with(
-            'https://api.open-meteo.com/v1/forecast',
-            params={
-                'latitude': cityLat,
-                'longitude': cityLong,
-                'current_weather': 'true'
-            }
+        mock_get.assert_has_calls([
+                mock.call('https://nominatim.openstreetmap.org/search?q=Edinburgh&format=json&limit=1'),
+                mock.call('https://api.open-meteo.com/v1/forecast',
+                    params={
+                        'latitude': '123',
+                        'longitude': '456',
+                        'current_weather': 'true'
+                    }
+                )
+            ]
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         
-        self.assertEqual(response.data['latitude'], cityLat)
-        self.assertEqual(response.data['longitude'], cityLong)
+        self.assertEqual(response.data['latitude'], 123)
+        self.assertEqual(response.data['longitude'], 456)
         self.assertIn('current_weather', response.data)
         
     @mock.patch('weatherapp.views.requests.get')
@@ -97,16 +105,11 @@ class GetWeatherByLocationTests(APITestCase):
 
         # Then
         mock_get.assert_has_calls([
-            mock.call('https://nominatim.openstreetmap.org/search',
-                params={
-                    'q': 'Atlantis',
-                    'format': 'json',
-                    'limit': 1
-                }),
+                mock.call('https://nominatim.openstreetmap.org/search?q=Atlantis&format=json&limit=1'),
                 mock.call('https://api.open-meteo.com/v1/forecast',
                           params={
-                    'latitude': 123,
-                    'longitude': 456,
+                    'latitude': '123',
+                    'longitude': '456',
                     'current_weather': 'true'
                 })
             ]
@@ -132,12 +135,7 @@ class GetWeatherByLocationTests(APITestCase):
 
         # Then
         mock_get.assert_called_once_with(
-            'https://nominatim.openstreetmap.org/search',
-            params={
-                'q': 'foo',
-                'format': 'json',
-                'limit': 1
-            }
+            'https://nominatim.openstreetmap.org/search?q=foo&format=json&limit=1'
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data['error'], "Unknown city.")

@@ -30,7 +30,7 @@ def get_coordinates(city_name):
             else:
                 raise ValueError("City not found in Nominatim API.")
         else:
-            raise ValueError("Failed to fetch coordinates from Nominatim API.")
+            return None
 
 def get(self, request):
     city_name = request.query_params.get('city')
