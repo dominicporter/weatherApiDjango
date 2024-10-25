@@ -16,7 +16,7 @@ def get_coordinates(city_name):
         print(f"City not in DB, looking it up in API: {city_name}")
         # Fetch coordinates from Nominatim API if the city is not in the database
         nominatim_url = f'https://nominatim.openstreetmap.org/search?q={city_name}&format=json&limit=1'
-        response = requests.get(nominatim_url)
+        response = requests.get(nominatim_url, headers={'User-Agent': 'weatherapp'})
 
         if response.status_code == 200:
             data = response.json()

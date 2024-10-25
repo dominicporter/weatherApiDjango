@@ -60,7 +60,8 @@ class GetWeatherByLocationTests(APITestCase):
 
         # Then
         mock_get.assert_has_calls([
-                mock.call('https://nominatim.openstreetmap.org/search?q=Edinburgh&format=json&limit=1'),
+                mock.call('https://nominatim.openstreetmap.org/search?q=Edinburgh&format=json&limit=1',
+                          headers={'User-Agent': 'weatherapp'}),
                 mock.call('https://api.open-meteo.com/v1/forecast',
                     params={
                         'latitude': '123',
@@ -105,7 +106,8 @@ class GetWeatherByLocationTests(APITestCase):
 
         # Then
         mock_get.assert_has_calls([
-                mock.call('https://nominatim.openstreetmap.org/search?q=Atlantis&format=json&limit=1'),
+                mock.call('https://nominatim.openstreetmap.org/search?q=Atlantis&format=json&limit=1',
+                          headers={'User-Agent': 'weatherapp'}),
                 mock.call('https://api.open-meteo.com/v1/forecast',
                           params={
                     'latitude': '123',
@@ -135,7 +137,8 @@ class GetWeatherByLocationTests(APITestCase):
 
         # Then
         mock_get.assert_called_once_with(
-            'https://nominatim.openstreetmap.org/search?q=foo&format=json&limit=1'
+            'https://nominatim.openstreetmap.org/search?q=foo&format=json&limit=1',
+            headers={'User-Agent': 'weatherapp'}
         )
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
         self.assertEqual(response.data['error'], "Unknown city.")
