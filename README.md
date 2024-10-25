@@ -40,7 +40,7 @@ As a developer
 I want an API that gives me some weather info about locations
 So that I can build a website which shows this
 
-### Objectives
+## Objectives
 - Set up the framework
 - Add TDD mechanism
 - Create GET endpoint which fetches weather info about a given lat/long or place name
