@@ -101,7 +101,8 @@ docker-compose build
 docker-compose start
 ```
 
-Go to http://localhost:8000/api/hello/
+Go to http://localhost:8000/api/weather/?city=munich
+Or http://localhost:8000/api/weather/?latitude=52.52&longitude=13.405
 
 ## Testing
 
