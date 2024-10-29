@@ -70,7 +70,7 @@ To start with just getting current weather and dumping out the JSON.
 
 - [X] Cities: query param with City name using a few hardcoded city names/latlong lookups
 
-- [X] Country lookup - on receiving an unknown country name try to get its latlong from another API
+- [X] City lookup - on receiving an unknown city name try to get its latlong from another API
 
 Using Nominatim API - free, open and seems to work.
 
